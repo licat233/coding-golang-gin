@@ -15,7 +15,9 @@ func main() {
 			c.String(http.StatusBadRequest, err.Error())
 			c.Abort()
 		}
-		c.String(http.StatusOK, string(bodyByts))
+		firstName := c.PostForm("first_name")
+		lastName := c.DefaultPostForm("last_name", "default_last_name")
+		c.String(http.StatusOK, "%s,%s,%s", firstName, lastName, string(bodyByts))
 	})
 	r.Run()
 }
